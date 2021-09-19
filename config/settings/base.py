@@ -57,6 +57,7 @@ DATABASES = {
     }
 }
 
+
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
