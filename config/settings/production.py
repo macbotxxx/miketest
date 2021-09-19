@@ -13,9 +13,20 @@ ALLOWED_HOSTS =  ["localhost", "0.0.0.0", "127.0.0.1"]
 
 # DATABASES
 # ------------------------------------------------------------------------------
-DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
-DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
+# DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
+# DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'miketest',
+        'USER': 'macbot',
+        'PASSWORD': 'M08034169322i',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -97,13 +108,19 @@ INSTALLED_APPS += ["anymail"]  # noqa F405
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 # https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
 # https://anymail.readthedocs.io/en/stable/esps/sendgrid/
-EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
-ANYMAIL = {
-    "SENDGRID_API_KEY": env("SENDGRID_API_KEY"),
-    "SENDGRID_GENERATE_MESSAGE_ID": env("SENDGRID_GENERATE_MESSAGE_ID"),
-    "SENDGRID_MERGE_FIELD_FORMAT": env("SENDGRID_MERGE_FIELD_FORMAT"),
-    "SENDGRID_API_URL": env("SENDGRID_API_URL", default="https://api.sendgrid.com/v3/"),
-}
+# EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'f7f1d4d566645a'
+EMAIL_HOST_PASSWORD = '1917db4a003d90'
+EMAIL_PORT = '2525'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# ANYMAIL = {
+#     "SENDGRID_API_KEY": env("SENDGRID_API_KEY"),
+#     "SENDGRID_GENERATE_MESSAGE_ID": env("SENDGRID_GENERATE_MESSAGE_ID"),
+#     "SENDGRID_MERGE_FIELD_FORMAT": env("SENDGRID_MERGE_FIELD_FORMAT"),
+#     "SENDGRID_API_URL": env("SENDGRID_API_URL", default="https://api.sendgrid.com/v3/"),
+# }
 
 # django-compressor
 # ------------------------------------------------------------------------------

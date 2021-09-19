@@ -18,7 +18,7 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool("DJANGO_DEBUG", False)
+DEBUG = True
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -41,10 +41,21 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+# DATABASES = {
+#     "default": env.db("DATABASE_URL", default="postgres:///miketest"),
+# }
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///miketest"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'miketest',
+        'USER': 'macbot',
+        'PASSWORD': 'M08034169322i',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -217,10 +228,18 @@ X_FRAME_OPTIONS = "DENY"
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND",
-    default="django.core.mail.backends.smtp.EmailBackend",
-)
+# EMAIL_BACKEND = env(
+#     "DJANGO_EMAIL_BACKEND",
+#     default="django.core.mail.backends.smtp.EmailBackend",
+# )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'f7f1d4d566645a'
+EMAIL_HOST_PASSWORD = '1917db4a003d90'
+EMAIL_PORT = '2525'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 
