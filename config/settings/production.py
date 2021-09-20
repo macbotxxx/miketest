@@ -11,6 +11,8 @@ SECRET_KEY = "KUzEjh6IYLPwJK8L0VvirF4GLqPkzZgT8KLcIX0iHO2SJg4LXmZKqHmVA5VFyLQk",
 # ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["miketest.com"])
 ALLOWED_HOSTS =  ["localhost", "0.0.0.0", "127.0.0.1", "161.35.9.151", "161.35.9.151:8000"]
 
+DEBUG = False
+
 # DATABASES
 # ------------------------------------------------------------------------------
 # DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
