@@ -1,55 +1,36 @@
+{% load i18n static %}
 {% load i18n static jazzmin admin_urls %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 {% get_jazzmin_settings request as jazzmin_settings %}
 {% get_jazzmin_ui_tweaks as jazzmin_ui %}
-
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<html lang="zxx" class="js">
+
 <head>
+    <base href="">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-    <title>{% block title %}{{ title }} | {{ jazzmin_settings.site_title }}{% endblock %}</title>
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
-
-    <!-- Bootstrap and adminLTE -->
-    <link rel="stylesheet" href="{% static "vendor/adminlte/css/adminlte.min.css" %}" id="adminlte-css">
-    
-
-    <!-- Bootswatch theme -->
-    {% if jazzmin_ui.theme.name != 'default' %}
-        <link rel="stylesheet" href="{{ jazzmin_ui.theme.src }}" id="jazzmin-theme" />
-    {% endif %}
-
-    {% if jazzmin_ui.dark_mode_theme %}
-        <link rel="stylesheet" href="{{ jazzmin_ui.dark_mode_theme.src }}" id="jazzmin-dark-mode-theme" media="(prefers-color-scheme: dark)"/>
-    {% endif %}
-
-    <!-- Custom fixes for django -->
-    <link rel="stylesheet" href="{% static "jazzmin/css/main.css" %}">
-
-    {% if jazzmin_settings.custom_css %}
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static jazzmin_settings.custom_css %}">
-    {% endif %}
-
-    <!-- favicons -->
-    <link rel="shortcut icon" href="{% static jazzmin_settings.site_icon %}" type="image/png">
-    <link rel="icon" href="{% static jazzmin_settings.site_icon %}" sizes="32x32" type="image/png">
-
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{% static 'macbotadmin/images/favicon.png' %}">
+    <!-- Page Title  -->
+    <title>Analytics Dashboard | DashLite Admin Template</title>
+    <!-- StyleSheets  -->
     <link rel="stylesheet" href="{% static 'macbotadmin/assets/css/dashlite.css' %}">
     <link id="skin-default" rel="stylesheet" href="{% static 'macbotadmin/assets/css/theme.css' %}">
+    <!-- Bootstrap and adminLTE -->
+    <link rel="stylesheet" href="{% static "vendor/adminlte/css/adminlte.min.css" %}" id="adminlte-css">
+    <!-- Custom fixes for django -->
+    <link rel="stylesheet" href="{% static "jazzmin/css/main.css" %}">
+     <!-- Font Awesome Icons -->
+     <link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
 
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    {% block extrastyle %} {% endblock %}
-    {% block extrahead %} {% endblock %}
+    
 </head>
+
 <body class="nk-body npc-default has-apps-sidebar has-sidebar ">
     <div class="nk-app-root">
         <div class="nk-apps-sidebar is-dark">
@@ -169,7 +150,8 @@
                 </div>
             </div>
         </div>
-          <div class="nk-main ">
+        <!-- main @s -->
+        <div class="nk-main ">
             <!-- wrap @s -->
             <div class="nk-wrap ">
                 <!-- main header @s -->
@@ -531,8 +513,8 @@
                         </div>
                     </div>
                 </div>
-                 <!-- main header @e -->
-                 <div class="nk-sidebar" data-content="sidebarMenu">
+                <!-- main header @e -->
+                <div class="nk-sidebar" data-content="sidebarMenu">
                     <div class="nk-sidebar-inner" data-simplebar>
                         <ul class="nk-menu nk-menu-md">
                             <li class="nk-menu-heading">
@@ -558,127 +540,43 @@
                     </div>
                 </div>
                 <!-- content @s -->
-
+                
                 <div class="nk-content ">
                     <div class="container-fluid">
                         <div class="nk-content-inner">
-                    
-
-                        <div class="" {% if is_popup %}style="margin-left:0px; padding-top: 20px;"{% endif %}>
-                            {% block page_content %}
-                                {% if not is_popup %}
-                                <div class="content-header">
-                                    <div class="container-fluid">
-                                        <div class="row mb-2">
-                                            <div class="col-auto col-sm-3">
-                                                <h1 class="m-0">{% block content_title %}{% endblock %}</h1>
-                                            </div>
-                                            <div class="col-auto col-sm-9">
-                                                {% block breadcrumbs %}{% endblock %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endif %}
-
-                                <div class="content">
-                                    <div class="container-fluid">
-                                        <section id="content" class="content">
-                                            {% block messages %}
-                                                {% for message in messages %}
-                                                    {% if message.tags == 'success' %}
-                                                        <div class="alert alert-success alert-dismissible">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                                                            </button>
-                                                            <i class="icon fa fa-check"></i>{{ message|capfirst }}
-                                                        </div>
-                                                    {% elif message.tags == 'error' %}
-                                                        <div class="alert alert-danger alert-dismissible">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                                                            </button>
-                                                            <i class="icon fa fa-ban"></i>{{ message|capfirst }}
-                                                        </div>
-                                                    {% elif message.tags == 'warning' %}
-                                                        <div class="alert alert-warning alert-dismissible">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                                                            </button>
-                                                            <i class="icon fa fa-exclamation-triangle"></i>{{ message|capfirst }}
-                                                        </div>
-                                                    {% elif message.tags == 'info' %}
-                                                        <div class="alert alert-info alert-dismissible">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
-                                                            </button>
-                                                            <i class="icon fa fa-info"></i>{{ message|capfirst }}
-                                                        </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% endblock messages %}
-                                            <div class="row">
-                                                {% block content %} {% endblock %}
-                                            </div>
-                                        </section>
-                                    </div>
-                                </div>
-
-
-                            {% endblock %}
-                        </div>
-
-
+                            <div class="nk-content-body">
+                             {% block content %}
+                                
+                             {% endblock %}
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                <!-- content @e -->
             </div>
-
-    </div>
-
-{% if jazzmin_settings.show_ui_builder %}
-<div id="codeBox" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">{% trans 'UI Configuration' %}</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>{% trans 'Copy this info your settings file to persist these UI changes' %}</p>
-                <pre><code></code></pre>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn {{ jazzmin_ui.button_classes.danger }}" data-dismiss="modal">{% trans 'Close' %}</button>
-            </div>
+            <!-- wrap @e -->
         </div>
-
+        <!-- main @e -->
     </div>
-</div>
-{% endif %}
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    <script src="{% static 'macbotadmin/assets/js/bundle.js' %}"></script>
+    <script src="{% static 'macbotadmin/assets/js/scripts.js' %}"></script>
+    <script src="{% static 'macbotadmin/assets/js/charts/gd-analytics.js' %}"></script>
+    <script src="{% static 'macbotadmin/assets/js/libs/jqvmap.js' %}"></script>
 
-<!-- jQuery -->
+    <!-- jQuery -->
 <script src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
 <!-- Bootstrap 4 -->
 <script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static "vendor/adminlte/js/adminlte.min.js" %}"></script>
 <!-- Django customisations -->
-<script src="{% static "jazzmin/js/main.js" %}"></script>
-
 {% if jazzmin_settings.custom_js %}
 <script src="{% static jazzmin_settings.custom_js %}"></script>
 {% endif %}
 
-{% if jazzmin_settings.show_ui_builder %}
-<script>
-    window.ui_changes = {{ jazzmin_ui.raw|as_json|safe }};
-</script>
-<script src="{% static "jazzmin/js/ui-builder.js" %}"></script>
-{% endif %}
-
-{% block extrajs %}{% endblock %}
-<script src="{% static 'macbotadmin/assets/js/bundle.js' %}"></script>
-<script src="{% static 'macbotadmin/assets/js/scripts.js' %}"></script>
-<script src="{% static 'macbotadmin/assets/js/charts/gd-analytics.js' %}"></script>
-<script src="{% static 'macbotadmin/assets/js/libs/jqvmap.js' %}"></script>
 
 </body>
+
 </html>
